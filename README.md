@@ -1,6 +1,9 @@
 # NETFLIX GPT 
 - create react app
 - configured tailwindcss
+-  npm install -D react-router-dom (for routing)
+- Header
+    - Login Form 
 
 # Features
 - login/sing up

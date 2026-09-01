@@ -1,12 +1,12 @@
+import React from 'react'
+import Body from './components/Body'
 
-import './App.css';
-
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <p className='text-5xl font-bold'>NAMASTEY EVERYONE</p>
+    <div>
+      <Body/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
