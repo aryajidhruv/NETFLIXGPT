@@ -3,8 +3,11 @@
 - configured tailwindcss
 -  npm install -D react-router-dom (for routing)
 - Header
+    - routing 
     - Login Form 
     - sign up form
+    - form vlaidation
+    - useref hooks
 
     ! use FORMIK DOCS TO CREATE FORMS WITHOUT TEARS
 

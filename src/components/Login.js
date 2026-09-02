@@ -1,12 +1,23 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from './Header'
-
-
+import {validateData} from '../utils/validate'
+ 
 
 const Login = () => {
     //This toggle function use for changing the singup form to sing in 
     const[isSingInForm,setIsSingInForm]= useState(true);
-    function handletoggle(){
+    const[errorMessage,setErrorMessage]= useState(null)
+    const email = useRef(null)
+    const password = useRef(null)
+    const name =  useRef(null)
+
+    const handleButtonclick=()=>{
+        const message = validateData(email.current.value,password.current.value,name.current.value)
+        setErrorMessage(message)
+
+    }
+    
+    const handletoggle =()=>{
         setIsSingInForm(!isSingInForm)
        
     }
@@ -18,23 +29,29 @@ const Login = () => {
         alt='logo' className='h-screen w-screen'/>
       </div>
 
-      <form className='absolute p-12 bg-black w-3/12 my-24 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-75'>
+      <form onSubmit={(e)=>e.preventDefault()} className='absolute p-12 bg-black w-3/12 my-24 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-75'>
         <h1 className='font-bold text-3xl py-4 '>
             {isSingInForm?"Sign In" : "Sign Up"}</h1>
 
-           {!isSingInForm &&( <input type='text' 
+           {!isSingInForm &&( <input ref={name} type='text' 
             placeholder='Full Name' 
             className='p-4 my-4 w-full  placeholder-white rounded-lg bg-gray-500' />)}
         
-        <input type='text' 
+        <input ref={email}
+             type='text' 
             placeholder='Email Address' 
             className='p-4 my-4 w-full  placeholder-white rounded-lg bg-gray-500' />
 
-        <input type='text'  
+        <input ref={password}
+                type='Password'  
                 placeholder='Password' 
                 className='p-4 my-4 w-full rounded-lg  placeholder-white bg-gray-500   ' />
-
-        <button className='p-4 mt-6 mb-4 w-full bg-red-700 font-semibold rounded-lg ' >{isSingInForm?"Sign In" : "Sign Up"}</button>
+        <p className='text-red-400 '>{errorMessage}</p>
+        <button className='p-4 mt-6 mb-4 w-full bg-red-700 font-semibold rounded-lg '
+        onClick={handleButtonclick}
+         >{isSingInForm?"Sign In" : "Sign Up"}
+            
+        </button>
         <p className='m-3 cursor-pointer ' onClick={handletoggle}>
             
             {isSingInForm?"New to Netflix ? Sign Up Now" : "Already registered ? Sign In now"}</p>
