@@ -8,6 +8,9 @@
     - sign up form
     - form vlaidation
     - useref hooks
+    - firebase setup
+    - deploying our app to production
+    - create signup user Account
 
     ! use FORMIK DOCS TO CREATE FORMS WITHOUT TEARS
 
