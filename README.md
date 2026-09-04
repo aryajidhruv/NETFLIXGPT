@@ -12,6 +12,9 @@
     - deploying our app to production
     - create signup user Account
 
+    - implemented sign In user api
+    - creat redux store with userSlice
+
     ! use FORMIK DOCS TO CREATE FORMS WITHOUT TEARS
 
 # Features

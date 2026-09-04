@@ -26,6 +26,7 @@ const Login = () => {
             setErrorMessage(error.code + "-" + error.message)
           })
       } else {
+        //sign in logic
         signInWithEmailAndPassword(auth, email.current.value, password.current.value)
           .then((userCredential) => {
             const user = userCredential.user
