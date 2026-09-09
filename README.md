@@ -17,6 +17,11 @@
 
     ! use FORMIK DOCS TO CREATE FORMS WITHOUT TEARS
 
+    # 7sep
+    - BugFix - singup and user DisplayName and profile picture updated
+    - Bugfix - If the user in not logged in redirect "/browse " to login page and vice versa
+    -  unsubscibed to the onauthStatechange callback 
+
 # Features
 - login/sing up
     - sign In/ sing Up form

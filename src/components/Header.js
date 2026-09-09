@@ -1,16 +1,49 @@
-import React from 'react'
+import {  onAuthStateChanged, signOut } from 'firebase/auth';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../utils/fireBase';
+import { addUser, removeUser } from '../utils/userSlice';
+import { Logo } from '../utils/constants';
 
 const Header = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const user = useSelector((store) => store.user)
+
+    const handleSignOut = () => {
+        signOut(auth)
+          .then(() => {})
+          .catch((error) => {
+            navigate("/error")
+          });
+    }
+
+    useEffect(() => {
+       const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+              const { uid, email, displayName, photoURL } = user;
+              dispatch(addUser({ uid, email, displayName, photoURL }));
+              navigate("/browse");
+            } else {
+              dispatch(removeUser());
+              navigate("/");
+            }
+          });
+          return unsubscribe;
+    }, [])
+
   return (
+    <div className='absolute w-screen px-8 py-6 bg-gradient-to-b from-black z-10 flex justify-between'>
+      <img className='w-44' src={Logo} alt="netflix-logo"/>
 
-    // This the Header 
-
-    // (bg-gradient-to-b from-black) this is for making the netfix logo highlighte
-    <div className='absolute w-40 px-8 py-6 bg-gradient-to-b from-black z-10'>
-
-
-     {/*This is the netflix log*/}
-      <img className='w-44 ' src="https://occ.a.nflxso.net/dnmt/api/v6/iL4oJVDYZ8KLSrJ6eG2OwtghbfQ/AAAAAfwxusEeCteu-L_QQ56_G2cohyI1E4BIh2uyr5t9gDhH0CKWHw3NVhndjuF7yQ26z3cYq_lnzY5pP6OarHyiibuiy2jIIa5sIhSvgal1S6u9YDVAyVoX6osPniEKN-dYy77H_pLfOCD7.svg" alt="netflix-logo"/>
+     {user && (
+        <div className='flex p-2 justify-between items-center gap-3'>
+          <img className='w-12 h-12 rounded-lg' alt='user-icon' src={user.photoURL} />
+          <span className='text-white font-semibold'>{user.displayName}</span>
+          <button className='font-bold text-white' onClick={handleSignOut}> Sign out</button>
+        </div>
+      )}
     </div>
   )
 }

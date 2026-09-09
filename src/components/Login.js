@@ -1,10 +1,17 @@
 import React, { useRef, useState } from 'react'
 import Header from './Header'
 import { validateData } from '../utils/validate'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { auth } from "../utils/fireBase"
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../utils/userSlice'
+import { background, profileLogo } from '../utils/constants'
 
 const Login = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const [isSingInForm, setIsSingInForm] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
   const email = useRef(null)
@@ -15,27 +22,44 @@ const Login = () => {
     const message = validateData(email.current.value, password.current.value)
     setErrorMessage(message)
 
-    if (!message) {
-      if (!isSingInForm) {
-        createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
-          .then((userCredential) => {
-            const user = userCredential.user
-            console.log(user)
+    if (message) return
+
+    if (!isSingInForm) {
+      // Sign Up flow
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then(async (userCredential) => {
+          await updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/181457664?v=4"
           })
-          .catch((error) => {
-            setErrorMessage(error.code + "-" + error.message)
-          })
-      } else {
-        //sign in logic
-        signInWithEmailAndPassword(auth, email.current.value, password.current.value)
-          .then((userCredential) => {
-            const user = userCredential.user
-            console.log(user)
-          })
-          .catch((error) => {
-            setErrorMessage(error.code + "-" + error.message)
-          })
-      }
+
+          const { uid, email, displayName, photoURL } = auth.currentUser
+          dispatch(addUser({ uid, email, displayName, photoURL }))
+
+          navigate("/browse")
+        })
+        .catch((error) => {
+          setErrorMessage(error.code + "-" + error.message)
+        })
+    } else {
+      // Sign In flow
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then(async (userCredential) => {
+          // Self-heal: if this account has no photo, or the old broken placeholder, fix it
+          if (!auth.currentUser.photoURL || auth.currentUser.photoURL.includes("example.com")) {
+            await updateProfile(auth.currentUser, {
+              photoURL: {profileLogo}
+            })
+          }
+
+          const { uid, email, displayName, photoURL } = auth.currentUser
+          dispatch(addUser({ uid, email, displayName, photoURL }))
+
+          navigate("/browse")
+        })
+        .catch((error) => {
+          setErrorMessage(error.code + "-" + error.message)
+        })
     }
   }
 
@@ -48,7 +72,7 @@ const Login = () => {
       <Header />
       <div className='absolute -z-10'>
         <img
-          src='https://assets.nflxext.com/ffe/siteui/vlv3/a00fdfd7-4916-4f12-b5ff-c05b9d7b4d07/web/IN-en-20260824-TRIFECTA-perspective_26443db2-0249-420d-bb73-77cfeea330e5_small.jpg'
+          src={background}
           alt='logo'
           className='h-screen w-screen object-cover'
         />
