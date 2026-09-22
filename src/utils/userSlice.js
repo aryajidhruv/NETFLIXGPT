@@ -23,7 +23,7 @@ const userSlice = createSlice({
             return action.payload; // replace the state with the user's data
         },
 
-        // removeUser: called when a user signs out — clears their data
+        //  User: called when a user signs out — clears their data
         removeUser: (state, action) => {
             return null; // reset the state back to "no user"
         }

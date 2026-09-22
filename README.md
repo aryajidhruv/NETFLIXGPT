@@ -22,6 +22,10 @@
     - Bugfix - If the user in not logged in redirect "/browse " to login page and vice versa
     -  unsubscibed to the onauthStatechange callback 
 
+    # 9sep
+    - Register TMDB api and create an app and get the access token
+    - get the data from TMDB now playing movie list API
+
 # Features
 - login/sing up
     - sign In/ sing Up form

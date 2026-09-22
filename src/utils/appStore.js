@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice"; // default import — no curly braces
 
+import moviesReducer from "./moviesSlice"
+
 // configureStore creates the central Redux "store" — 
 // this is the single place where all your app's global state lives
 const appStore = configureStore({
@@ -8,6 +10,7 @@ const appStore = configureStore({
     // Here we register the "user" slice, powered by userReducer
     reducer: {
         user: userReducer,
+        movies: moviesReducer
     }
 })
 
