@@ -1,48 +1,69 @@
-# NETFLIX GPT 
-- create react app
-- configured tailwindcss
--  npm install -D react-router-dom (for routing)
+# Netflix GPT
+
+- Create React App
+- Configured TailwindCSS 
 - Header
-    - routing 
-    - Login Form 
-    - sign up form
-    - form vlaidation
-    - useref hooks
-    - firebase setup
-    - deploying our app to production
-    - create signup user Account
-
-    - implemented sign In user api
-    - creat redux store with userSlice
-
-    ! use FORMIK DOCS TO CREATE FORMS WITHOUT TEARS
-
-    # 7sep
-    - BugFix - singup and user DisplayName and profile picture updated
-    - Bugfix - If the user in not logged in redirect "/browse " to login page and vice versa
-    -  unsubscibed to the onauthStatechange callback 
-
-    # 9sep
-    - Register TMDB api and create an app and get the access token
-    - get the data from TMDB now playing movie list API
+- Routing of App
+- Login Form
+- Sign up Form
+- Form Validation
+- useRef Hook
+- Firebase Setup
+- Deploying our app to production
+- Create SignUp User Account
+- Implement Sign In user Api
+- Created Redux Store with userSlice
+- Implemented Sign out 
+- Update Profile
+- BugFix: Sign up user displayName and profile picture update
+- BugFix: if the user is not logged in Redirect /browse to Login Page and vice-versa
+- Unsubscibed to the onAuthStateChanged callback
+- Add hardcoded values to the constants file
+- Regiter TMDB API & create an app & get access token
+- Get Data from TMDB now playing movies list API
+- Custom Hook for Now Playing Movies
+- Create movieSlice
+- Update Store with movies Data
+- Planning for MainContauiner & secondary container
+- Fetch Data for Trailer Video
+- Update Store with Trailer Video Data
+- Embedded the Yotube video and make it autoplay and mute
+- Tailwind Classes to make Main Container look awesome
+- Build Secondary Component
+- Build Movie List
+- build Movie Card
+- TMDB Image CDN URL
+- Made the Browsre page amazing with Tailwind CSS
+- usePopularMovies Custom hook
+- GPT Search Page
+- GPT Search Bar
+- (BONUS) Multi-language Feature in our App)
+- Get Open AI Api Key 
+- Gpt Search API Call
+- fetched gptMoviesSuggestions from TMDB
+- created gptSlice added data
+- Resused Movie List component to make movie suggestion container
+- Memoization
+- Added .env file
+- Adding .env file to gitignore
+- Made our Site Responsive
 
 # Features
-- login/sing up
-    - sign In/ sing Up form
-    - redirect to browser page
-
+- Login/Sign Up
+    - Sign In /Sign up Form
+    - redirect to Browse Page
 - Browse (after authentication)
-    - header
-    - main movie
-        - Trailer in background
-        - Title & description
-        - Movie suggestion
-            - MovieList * n
-        
+    - Header
+    - Main Movie
+        - Tailer in Background
+        - Title & Description
+        - MovieSuggestions
+            - MovieLists * N 
 - NetflixGPT
     - Search Bar
-    - Movie suggestion
+    - Movie Suggestions
 
 
-# 2SEP
-- make a toggle function to change signup form to singin
+
+# Project Setup
+- Before starting the project please add .env file and add TMDB and OPENAI KEY into it.

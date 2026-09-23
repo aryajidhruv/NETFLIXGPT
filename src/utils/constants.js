@@ -8,3 +8,5 @@ export const API_OPTION = {
     method: 'GET',
     headers: {accept: 'application/json', Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZGFiMTRiNTk4NTlhM2IzNzUxM2QyN2RiMzA4ODU4YyIsIm5iZiI6MTc4ODk0ODk3OC4yMjcsInN1YiI6IjZhYTEzMWYyYjQ3ZDk1MzE0MjRmY2I0OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6H2CjtfJ7EAT5W9C-s4mOsgI9vQi9W8Q9PP-7fy5u5w'}
   };
+
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w780 /"
